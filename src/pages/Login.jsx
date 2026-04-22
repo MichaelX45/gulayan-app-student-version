@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -9,7 +9,6 @@ function Login({ onNavigate }) {
         password: '',
         rememberMe: false
     })
-
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target
         setFormData(prev => ({
@@ -17,13 +16,15 @@ function Login({ onNavigate }) {
             [name]: type === 'checkbox' ? checked : value
         }))
     }
-
     const handleSubmit = (e) => {
         e.preventDefault()
         // TODO implement login logic here....
         // TODO validate user credentials and get token from server
     }
-
+    
+        useEffect(() => {
+        axios.get("http://spa-bi-torrente.test/api/sample")
+    }, [])
     return (
         <div className="min-h-screen bg-green-50 flex items-center justify-center px-4 py-12">
             <div className="w-full max-w-md">
@@ -94,7 +95,7 @@ function Login({ onNavigate }) {
                             <span className="px-4 bg-white text-gray-500">or continue with</span>
                         </div>
                     </div>
-                    
+
                     {/* Sign Up Link */}
                     <p className="mt-6 text-center text-sm text-gray-600">
                         Don't have an account?{' '}
